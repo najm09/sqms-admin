@@ -1,0 +1,2 @@
+# sqms-admin
+Admin Panel
