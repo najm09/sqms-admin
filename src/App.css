@@ -1,0 +1,16 @@
+.App {
+  display: inline-block;
+  position: relative;
+  top: 10em;
+  left: 10em;
+}
+
+/* 
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
