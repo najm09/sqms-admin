@@ -8,16 +8,18 @@ const LoginForm = () => {
   const [password, setPassword] = React.useState('');
 
   const handleSubmit = () => {
+    
+    // setLoginSuccess(true)
     // axios post request 
     //setLoginSuccess(true)
   }
 
   return (
-    loginSuccess ? <Navigate to = "/details"/> : 
+    loginSuccess ? <Navigate to = "/dashboard"/> : 
     <div className='container'>
       <h1>Login</h1>
       <div className="col-sm-4">
-        <label for="exampleFormControlInput1" className="form-label">Email address</label>
+        <label className="form-label">Email address</label>
         <input 
         type="email" 
         className="form-control"  
@@ -25,7 +27,7 @@ const LoginForm = () => {
         onChange={(e) => setEmail(e.target.value)}/>
       </div>
       <div className='col-sm-4'>
-        <label for="exampleFormControlInput2" className="form-label">Password</label>
+        <label className="form-label">Password</label>
         <input 
         type="password" 
         className="form-control"  
