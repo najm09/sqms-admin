@@ -1,8 +1,10 @@
 .App {
-  display: inline-block;
+  /* margin: 2em;
+  padding: 2em; */
+  display: inline;
   position: relative;
-  top: 10em;
-  left: 10em;
+  top: 5em;
+  left: 5em;
 }
 
 /* 
