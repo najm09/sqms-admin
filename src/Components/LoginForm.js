@@ -1,50 +1,60 @@
+import axios from 'axios';
 import React from 'react'
 import { Navigate } from 'react-router-dom';
 
+
+const link = process.env.REACT_APP_LINK
+
 const LoginForm = () => {
 
-  const [loginSuccess, setLoginSuccess] = React.useState(false);
+  const [admin, setAdmin] = React.useState(false)
+  const [message, setMessage] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const handleSubmit = () => {
-    
-    // setLoginSuccess(true)
-    // axios post request 
-    //setLoginSuccess(true)
+  const handleSubmit = async () => {
+
+    await axios.post(`${link}/login`, { email: email, password: password })
+      .then(response => {
+        response?.status === 200 ? response?.data?.role === "admin" ? setAdmin(true) : setMessage("Sorry You're not an Admin !") : setMessage("Wrong Credentials");
+      })
+      .catch(error => console.error(error))
   }
 
   return (
-    loginSuccess ? <Navigate to = "/dashboard"/> : 
-    <div className='container'>
-      <h1>Login</h1>
-      <div className="col-sm-4">
-        <label className="form-label">Email address</label>
-        <input 
-        type="email" 
-        className="form-control"  
-        placeholder="name@example.com" 
-        onChange={(e) => setEmail(e.target.value)}/>
+    admin ? <Navigate to="/dashboard" /> :
+      <div className='container'>
+        <h1>Login</h1>
+        {
+          message ? <div className="alert alert-danger" role="alert">{message}</div> : ""
+        }
+        <div className="col-sm-4">
+          <label className="form-label">Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="name@example.com"
+            onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className='col-sm-4'>
+          <label className="form-label">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="******"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <br />
+        <div className='col-sm-4'>
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={handleSubmit}
+          >Submit
+          </button>
+        </div>
       </div>
-      <div className='col-sm-4'>
-        <label className="form-label">Password</label>
-        <input 
-        type="password" 
-        className="form-control"  
-        placeholder="******" 
-        onChange={(e)=>setPassword(e.target.value)}
-        />
-      </div>
-      <br/>
-      <div className='col-sm-4'>
-        <button 
-        type="button" 
-        className="btn btn-success"
-        onClick={handleSubmit}
-        >Submit
-        </button>
-      </div>
-    </div>
   )
 }
 
