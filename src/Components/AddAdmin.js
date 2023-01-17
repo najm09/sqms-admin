@@ -11,7 +11,7 @@ const AddAdmin = () => {
   return (
     <div className='container'>
       <div className="col-sm-4">
-        <label for="exampleFormControlInput1" className="form-label">Email address</label>
+        <label className="form-label">Email address</label>
         <input
           type="email"
           className="form-control"

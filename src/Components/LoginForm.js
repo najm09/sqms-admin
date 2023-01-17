@@ -16,7 +16,14 @@ const LoginForm = () => {
 
     await axios.post(`${link}/login`, { email: email, password: password })
       .then(response => {
-        response?.status === 200 ? response?.data?.role === "admin" ? setAdmin(true) : setMessage("Sorry You're not an Admin !") : setMessage("Wrong Credentials");
+        if (response?.status === 200) {
+          if (response?.data?.role === "admin") {
+            localStorage.setItem("access-token", response?.data?.accessToken)
+            setAdmin(true)
+          }
+          else setMessage("Sorry You're not an Admin !")
+        }
+        else setMessage("Wrong Credentials")
       })
       .catch(error => console.error(error))
   }
