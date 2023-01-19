@@ -2,8 +2,7 @@ import {React} from 'react'
 import {axios} from 'axios';
 import { getHeader } from '../Services/setUpAxios';
 import { endpoints } from '../Constants/Urls';
-
-const link = process.env.REACT_APP_LINK
+import { MAIN_URL } from '../../Constants/Urls';
 
 const Users = () => {
 
@@ -14,7 +13,7 @@ const Users = () => {
 
   React.useEffect(() => {
     const getUsers = async () => {
-      await axios.get(`${endpoints.ALL_DETAILS}/users`, {headers : getHeader()})
+      await axios.get(`${MAIN_URL.ALL_DETAILS}${endpoints.USERS}`, {headers : getHeader()})
         .then(res => {
           if (res.status === 200) {
             setUsers(res.data)

@@ -1,8 +1,7 @@
 import React from 'react'
 import axios from 'axios';
+import { MAIN_URL, endpoints } from '../../Constants/Urls';
 import { getHeader } from '../Services/setUpAxios';
-
-const link = process.env.REACT_APP_LINK
 
 const Patients = () => {
 
@@ -13,7 +12,7 @@ const Patients = () => {
   React.useEffect(() => {
 
     const getPatients = async () => {
-      await axios.get(`${link}/patients`)
+      await axios.get(`${MAIN_URL.ALL_DETAILS}${endpoints.PATIENTS}`, {headers : getHeader()})
         .then(res => setPatients(res.data))
         .catdh(err => console.error(err));
     }
@@ -23,7 +22,7 @@ const Patients = () => {
   }, [])
 
   return (
-    <div style={{margin : '3em'}}>
+    <div style={{ margin: '3em' }}>
       <h1>Patients Lists</h1>
       <table className='table'>
         <thead>
