@@ -1,26 +1,33 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
 const link = process.env.REACT_APP_LINK;
 
 const Users = () => {
-  const [users, setUsers] = React.useState();
+  const [users, setUsers] = React.useState([]);
 
-  var id = 0;
+  const accessToken = localStorage.getItem('access-token');
+
+  const headers = {
+    'Content-type': 'application/json',
+    'access-token': accessToken
+  };
 
   React.useEffect(() => {
     const getUsers = async () => {
-      await axios
-        .get(`${link}/users`)
-        .then((res) => setUsers(res.data))
-        .catch((err) => console.error(err));
+      try {
+        const data = await axios.get(`${link}/users`, { headers: headers });
+        setUsers(data.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     getUsers();
   }, []);
 
   return (
-    <div style={{ margin: "3em" }}>
+    <div style={{ margin: '3em' }}>
       <h1>Users List </h1>
       <table className="table">
         <thead>
@@ -30,16 +37,16 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {users
+          {users && users.length > 0
             ? users.map((user) => {
                 return (
-                  <tr>
+                  <tr key={user._id}>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                   </tr>
                 );
               })
-            : "Loading..."}
+            : 'Loading...'}
         </tbody>
       </table>
     </div>

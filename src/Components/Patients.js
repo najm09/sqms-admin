@@ -1,30 +1,41 @@
-import React from 'react'
+import React from 'react';
 import axios from 'axios';
 
-const link = process.env.REACT_APP_LINK
+const link = process.env.REACT_APP_LINK;
 
 const Patients = () => {
-
-  const [patients, setPatients] = React.useState();
+  const [patients, setPatients] = React.useState([]);
 
   var id = 0;
 
-  React.useEffect(() => {
+  const accessToken = localStorage.getItem('access-token');
 
+  const headers = {
+    'Content-type': 'application/json',
+    'access-token': accessToken
+  };
+
+  React.useEffect(() => {
     const getPatients = async () => {
-      await axios.get(`${link}/patients`)
-        .then(res => setPatients(res.data))
-        .catdh(err => console.error(err));
-    }
+      try {
+        const data = await axios.get(`${link}/users`, { headers: headers });
+        setPatients(data.data);
+      } catch (error) {
+        console.error(error.message);
+      }
+
+      console.log('data fetched is over.');
+    };
 
     getPatients();
+  }, []);
 
-  }, [])
+  console.log('patients: ', patients);
 
   return (
-    <div style={{margin : '3em'}}>
+    <div style={{ margin: '3em' }}>
       <h1>Patients Lists</h1>
-      <table className='table'>
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">Name</th>
@@ -36,24 +47,24 @@ const Patients = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            patients ? patients.map(patient => {
-              return (
-                <tr>
-                  <td>{patient.name}</td>
-                  <td>{patient.age}</td>
-                  <td>{patient.weight}</td>
-                  <td>{patient.typeOfCase}</td>
-                  <td>{patient.doctor}</td>
-                  <td>{patient.contactNumber}</td>
-                </tr>
-              )
-            }) : "Loading..."
-          }
+          {patients && patients.length > 0
+            ? patients.map((patient) => {
+                return (
+                  <tr key={patient._id}>
+                    <td>{patient.name}</td>
+                    <td>{patient.age}</td>
+                    <td>{patient.weight}</td>
+                    <td>{patient.typeOfCase}</td>
+                    <td>{patient.doctor}</td>
+                    <td>{patient.contactNumber}</td>
+                  </tr>
+                );
+              })
+            : 'Loading...'}
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default Patients
+export default Patients;
