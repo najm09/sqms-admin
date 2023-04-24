@@ -1,7 +1,7 @@
 import React from "react";
 
 const RemoveAdmin = () => {
-  const [email, setEmail] = React.useState("");
+  // const [email, setEmail] = React.useState("");
 
   const handleSubmit = () => {
     // remove role = "admin" for the current email
@@ -15,7 +15,7 @@ const RemoveAdmin = () => {
           type="email"
           className="form-control"
           placeholder="name@example.com"
-          onChange={(e) => setEmail(e.target.value)}
+          // onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <br />

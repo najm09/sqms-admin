@@ -1,10 +1,11 @@
 import React from 'react'
 import Patients from './Patients'
 import Users from './Users'
+// import AreaChart from "./Analytics/Area/graph"
 
 const Details = () => {
   return (
-    <div style={{display:'flex', flexDirection:'row', margin : '1em'}}>
+    <div className="container">
       <Patients/>
       <Users/>
     </div>

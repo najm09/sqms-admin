@@ -24,11 +24,11 @@ const Users = () => {
     };
 
     getUsers();
-  }, []);
+  });
 
   return (
-    <div style={{ margin: '3em' }}>
-      <h1>Users List </h1>
+    <div >
+      <h4>Users List </h4>
       <table className="table">
         <thead>
           <tr>

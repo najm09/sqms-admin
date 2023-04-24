@@ -6,8 +6,6 @@ const link = process.env.REACT_APP_LINK;
 const Patients = () => {
   const [patients, setPatients] = React.useState([]);
 
-  var id = 0;
-
   const accessToken = localStorage.getItem('access-token');
 
   const headers = {
@@ -18,23 +16,22 @@ const Patients = () => {
   React.useEffect(() => {
     const getPatients = async () => {
       try {
-        const data = await axios.get(`${link}/users`, { headers: headers });
+        const data = await axios.get(`${link}/patients`, { headers: headers });
         setPatients(data.data);
       } catch (error) {
         console.error(error.message);
       }
-
       console.log('data fetched is over.');
     };
 
     getPatients();
-  }, []);
+  });
 
   console.log('patients: ', patients);
 
   return (
-    <div style={{ margin: '3em' }}>
-      <h1>Patients Lists</h1>
+    <div >
+      <h4>Patients Lists</h4>
       <table className="table">
         <thead>
           <tr>

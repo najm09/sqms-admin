@@ -2,7 +2,7 @@ import React from "react"
 
 const AddAdmin = () => {
 
-  const [email, setEmail] = React.useState('')
+  // const [email, setEmail] = React.useState('')
 
   const handleSubmit = () => {
     // add role = "admin" for the current email
@@ -16,7 +16,8 @@ const AddAdmin = () => {
           type="email"
           className="form-control"
           placeholder="name@example.com"
-          onChange={(e) => setEmail(e.target.value)} />
+          // onChange={(e) => setEmail(e.target.value)} 
+          />
       </div>
       <br />
       <div className='col-sm-4'>
