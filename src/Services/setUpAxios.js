@@ -8,7 +8,7 @@ export const setUpAxios = (axios) => {
     (error) => {
       if(error.response){
         if(error.response.status === 401){
-          windows.location.replace("/login")
+          window.location.replace("/error")
         }
       }
       return Promise.reject(error)

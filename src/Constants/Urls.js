@@ -1,11 +1,14 @@
 export const MAIN_URL = {
-  ALL_DETAILS: process.env.REACT_APP_ADMIN_USERS,
+  ALL_DETAILS: process.env.REACT_APP_LINK,
 }
 
 export const endpoints = {
   USERS: "/users",
   PATIENTS: "/patients",
-  LOGIN: "/login"
+  LOGIN: "/login",
+  SIGNUP: "/signup",
+  QUEUE_STATUS: "/qstatus",
+  ADMIN_ACTIONS: "/admin-action"
 }
 
 // `${MAIN_URL.ALL_DETAILS}${endpoints.USERS}`

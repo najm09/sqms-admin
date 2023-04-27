@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from 'react-redux'
 import Login from './features/Login/login'
 import Dashboard from './features/Dashboard/dashboard';
+import ErrorPage from './Components/Error';
 import { setUpAxios } from './Services/setUpAxios';
 import { store } from './Store/store';
 
@@ -18,6 +19,7 @@ const App = () => {
             <Routes>
               <Route path={"/"} element={<Login />} />
               <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/error' element={<ErrorPage />} />
             </Routes>
           </main>
         </BrowserRouter>

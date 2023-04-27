@@ -1,20 +1,16 @@
 import React from 'react'
 import axios from 'axios';
-import { MAIN_URL, endpoints } from '../../Constants/Urls';
-import { getHeader } from '../Services/setUpAxios';
+import {MAIN_URL, endpoints} from '../../Constants/Urls';
+import {headers} from '../../Services/setUpAxios';
 
 const Patients = () => {
-
   const [patients, setPatients] = React.useState();
 
-  var id = 0;
-
   React.useEffect(() => {
-
     const getPatients = async () => {
-      await axios.get(`${MAIN_URL.ALL_DETAILS}${endpoints.PATIENTS}`, {headers : getHeader()})
+      await axios.get(`${MAIN_URL.ALL_DETAILS}${endpoints.PATIENTS}`, {headers : headers()})
         .then(res => setPatients(res.data))
-        .catdh(err => console.error(err));
+        .catch(err => console.error(err));
     }
 
     getPatients();
@@ -39,7 +35,7 @@ const Patients = () => {
           {
             patients ? patients.map(patient => {
               return (
-                <tr>
+                <tr key={patient._id}>
                   <td>{patient.name}</td>
                   <td>{patient.age}</td>
                   <td>{patient.weight}</td>

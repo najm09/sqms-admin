@@ -1,7 +1,7 @@
-import {React} from 'react'
-import {axios} from 'axios';
-import { getHeader } from '../Services/setUpAxios';
-import { endpoints } from '../Constants/Urls';
+import React from 'react'
+import axios from 'axios';
+import { headers } from '../../Services/setUpAxios';
+import { endpoints } from '../../Constants/Urls';
 import { MAIN_URL } from '../../Constants/Urls';
 
 const Users = () => {
@@ -13,7 +13,7 @@ const Users = () => {
 
   React.useEffect(() => {
     const getUsers = async () => {
-      await axios.get(`${MAIN_URL.ALL_DETAILS}${endpoints.USERS}`, {headers : getHeader()})
+      await axios.get(`${MAIN_URL.ALL_DETAILS}${endpoints.USERS}`, {headers : headers()})
         .then(res => {
           if (res.status === 200) {
             setUsers(res.data)

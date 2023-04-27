@@ -1,38 +1,47 @@
-import React from "react";
-import AddAdmin from "./AddAdmin";
-import Details from "./Details";
-import RemoveAdmin from "./RemoveAdmin";
+import * as React from 'react';
+import Tabs from '@mui/base/Tabs';
+import TabsList from '@mui/base/TabsList';
+import TabPanel from '@mui/base/TabPanel';
+import Tab from '@mui/base/Tab';
+import { makeStyles } from '@mui/styles';
+import AdminActionForm from "../Admin/AdminActions";
+import Users from '../Users/users';
+import Patients from '../Patients/patients';
+
+const useStyles = makeStyles({
+  tableList: {
+    paddingLeft: "5%",
+    paddingRight: "5%",
+    position: "fixed",
+    left: "0",
+    top: "0.3",
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  panel: {
+    marginTop: '1em'
+  }
+});
 
 
-const Dashboard = () => {
-  const [renderAdminForm, setRenderAdminForm] = React.useState(0);
 
+function Dashboard() {
+  const classes = useStyles();
   return (
-    <div>
-      <ul className="nav nav-tabs">
-      <li className="nav-item">
-          <span className="nav-link active" aria-current="page" href="/dashboard">SQMS | Admin Panel</span>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link " aria-current="page" href="/dashboard">Home</a>
-        </li>
-        <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Actions</a>
-          <ul className="dropdown-menu">
-            <li><button className="dropdown-item" onClick = {() => {setRenderAdminForm(1)}}>Add admin</button></li>
-            <li><button className="dropdown-item" onClick = {() => {setRenderAdminForm(2)}}>Remove Admin</button></li>
-          </ul>
-        </li>
-        <li className="nav-item">
-          <button className="nav-link " aria-current="page" >Queue Status</button>
-        </li>
-      </ul>
-
-      {renderAdminForm === 1 ? <AddAdmin/> : renderAdminForm === 2 ? <RemoveAdmin/> : ""}
-      <Details/>
-
-    </div>
-  )
+    <Tabs>
+      <TabsList className={classes.tableList}>
+        <Tab>Users</Tab>
+        <Tab>Patients</Tab>
+        <Tab>Admin Actions</Tab>
+      </TabsList>
+      <div className={classes.panel}>
+        <TabPanel ><Users /></TabPanel>
+        <TabPanel><Patients /></TabPanel>
+        <TabPanel><AdminActionForm /></TabPanel>
+      </div>
+    </Tabs>
+  );
 }
 
 export default Dashboard;

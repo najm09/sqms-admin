@@ -1,69 +1,55 @@
-import axios from 'axios';
-import React from 'react'
-import { Navigate } from 'react-router-dom';
-import { MAIN_URL, endpoints } from '../../Constants/Urls';
+import React, { useState, useEffect } from 'react'
+import { Button, Grid, TextField } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAction } from './loginSlice';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { fetching, isAdmin, loginMessage } = useSelector(({ loginActionReducer }) => loginActionReducer);
 
-  const [admin, setAdmin] = React.useState(false)
-  const [message, setMessage] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const handleSubmit = async () => {
-
-    const body = { 
-      email: email, password: password 
-    }
-
-    await axios.post(`${MAIN_URL.ALL_DETAILS}${endpoints.LOGIN}`, body)
-      .then(response => {
-        if (response?.status === 200) {
-          if (response?.data?.role === "admin") {
-            localStorage.setItem("access-token", response?.data?.accessToken)
-            setAdmin(true)
-          }
-          else setMessage("Sorry You're not an Admin !")
-        }
-        else setMessage("Wrong Credentials")
-      })
-      .catch(error => console.error(error))
+  const handleSubmit = () => {
+    dispatch(loginAction({ email, password }));
   }
 
+  useEffect(() => {
+    if(isAdmin) window.location.replace("/dashboard");
+  })
+
   return (
-    admin ? <Navigate to="/dashboard" /> :
-      <div className='container'>
-        <h1>Login</h1>
-        {
-          message ? <div className="alert alert-danger" role="alert">{message}</div> : ""
-        }
-        <div className="col-sm-4">
-          <label className="form-label">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="name@example.com"
-            onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div className='col-sm-4'>
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="******"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <br />
-        <div className='col-sm-4'>
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={handleSubmit}
-          >Submit
-          </button>
-        </div>
-      </div>
+    <Grid container spacing={2} marginTop={20} justify="center" wrap="wrap" direction="column" width="30%">
+      <Grid item xs={6} md={10}>
+        {loginMessage.length ? <>loginMessage</> : ""}
+      </Grid>
+      <Grid item xs={6} md={10}>
+        <TextField
+          color='success'
+          fullWidth
+          required
+          type='email'
+          id="outlined-required"
+          label="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Grid>
+      <Grid item xs={6} md={10}>
+        <TextField
+          fullWidth
+          color='success'
+          required
+          type='password'
+          id="outlined-required"
+          label="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Grid>
+      <Grid item xs={6} md={12}>
+        <Button color="success" variant="contained" disabled={fetching || !email || !password} onClick={handleSubmit}>
+          Login
+        </Button>
+      </Grid>
+    </Grid>
   )
 }
 
