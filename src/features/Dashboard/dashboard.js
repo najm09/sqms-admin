@@ -1,47 +1,76 @@
 import * as React from 'react';
-import Tabs from '@mui/base/Tabs';
-import TabsList from '@mui/base/TabsList';
-import TabPanel from '@mui/base/TabPanel';
-import Tab from '@mui/base/Tab';
-import { makeStyles } from '@mui/styles';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import AdminActionForm from "../Admin/AdminActions";
 import Users from '../Users/users';
 import Patients from '../Patients/patients';
+import QueueStatus from "../../features/Queue/Queue"
 
-const useStyles = makeStyles({
-  tableList: {
-    paddingLeft: "5%",
-    paddingRight: "5%",
-    position: "fixed",
-    left: "0",
-    top: "0.3",
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  panel: {
-    marginTop: '1em'
-  }
-});
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-
-
-function Dashboard() {
-  const classes = useStyles();
   return (
-    <Tabs>
-      <TabsList className={classes.tableList}>
-        <Tab>Users</Tab>
-        <Tab>Patients</Tab>
-        <Tab>Admin Actions</Tab>
-      </TabsList>
-      <div className={classes.panel}>
-        <TabPanel ><Users /></TabPanel>
-        <TabPanel><Patients /></TabPanel>
-        <TabPanel><AdminActionForm /></TabPanel>
-      </div>
-    </Tabs>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
   );
 }
 
-export default Dashboard;
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+export default function Dashboard() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="Users" {...a11yProps(0)} />
+          <Tab label="Patients" {...a11yProps(1)} />
+          <Tab label="Admin Actions" {...a11yProps(2)} />
+          <Tab label="Queue Status" {...a11yProps(3)} />
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <Users />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Patients />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <AdminActionForm />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <QueueStatus />
+      </TabPanel>
+    </Box>
+  );
+}

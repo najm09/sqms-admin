@@ -10,7 +10,7 @@ export const loginAction = createAsyncThunk(
 )
 
 const loginActionSlice = createSlice({
-  name : "userLoginManagement",
+  "name" : "userLoginManagement",
   initialState:{
     fetching: false,
     fetched: false,

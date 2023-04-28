@@ -1,59 +1,53 @@
-import React from 'react'
-import axios from 'axios';
-import { headers } from '../../Services/setUpAxios';
-import { endpoints } from '../../Constants/Urls';
-import { MAIN_URL } from '../../Constants/Urls';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import {usersList} from './usersSlice';
+
 
 const Users = () => {
-
-  const [users, setUsers] = React.useState();
-  const [message, setMessage] = React.useState('');
-
-  var id = 0;
-
-  React.useEffect(() => {
-    const getUsers = async () => {
-      await axios.get(`${MAIN_URL.ALL_DETAILS}${endpoints.USERS}`, {headers : headers()})
-        .then(res => {
-          if (res.status === 200) {
-            setUsers(res.data)
-          }
-          else setMessage('Access Denied !')
-        })
-        .catch(err => console.error(err));
-    }
-    getUsers();
-  }, [])
+  const dispatch = useDispatch();
+  const {fetched, data} = useSelector(({UsersListActionReducer}) => UsersListActionReducer);
+  useEffect(() => {
+    dispatch(usersList());
+  },[])
 
   return (
-    <div style={{ margin: '3em' }}>
-      <h1>Users List </h1>
-      {
-        !message ? <table className='table'>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              users ? users.map(user => {
-                return (
-                  <tr>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                  </tr>
-                )
-              }) : "Loading..."
-            }
-          </tbody>
-        </table>
-        : <div className="alert alert-danger" role="alert">{message}</div>
-      }
-
-    </div>
-  )
+    <TableContainer component={Paper}>
+      <Table size={"small"} sx={{ minWidth: 650 }} aria-label="a dense table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Id</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell >Email</TableCell>
+            <TableCell >Role</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {fetched && data.map((row) => (
+            <TableRow
+              key={row._id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row._id}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell >{row.email}</TableCell>
+              <TableCell >{row.role}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
 
 export default Users

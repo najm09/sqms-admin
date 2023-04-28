@@ -11,8 +11,9 @@ const AdminActionForm = () => {
   const dispatch = useDispatch();
 
   return (
-    <Box>
+    <Box width={"25%"}>
       <TextField
+        fullWidth
         color='primary'
         variant='standard'
         required
@@ -21,18 +22,22 @@ const AdminActionForm = () => {
         label="Email"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <Button
-        variant='text'
-        onClick={() => dispatch(updateAdminUser({ email, role: "admin" }))}
-        disabled={!email}>
-        Allow Admin Access
-      </Button>
-      <Button
-        variant='text'
-        onClick={() => dispatch(updateAdminUser({ email, role: "user" }))}
-        disabled={!email}>
-        Disallow Admin Access
-      </Button>
+      <Box marginTop={4} >
+        <Button
+          color='success'
+          variant='text'
+          onClick={() => dispatch(updateAdminUser({ email, role: "admin" }))}
+          disabled={!email}>
+          Allow Admin Access
+        </Button>
+        <Button
+          color='error'
+          variant='text'
+          onClick={() => dispatch(updateAdminUser({ email, role: "user" }))}
+          disabled={!email}>
+          Disallow Admin Access
+        </Button>
+      </Box>
     </Box>
   )
 }

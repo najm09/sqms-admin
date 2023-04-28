@@ -18,9 +18,9 @@ const LoginForm = () => {
   })
 
   return (
-    <Grid container spacing={2} marginTop={20} justify="center" wrap="wrap" direction="column" width="30%">
+    <Grid container spacing={2} marginTop={10} justify="center" wrap="wrap" direction="column" width="30%">
       <Grid item xs={6} md={10}>
-        {loginMessage.length ? <>loginMessage</> : ""}
+        <h1>Login</h1>
       </Grid>
       <Grid item xs={6} md={10}>
         <TextField
