@@ -19,7 +19,7 @@ const Users = () => {
 
   return (
     <TableContainer component={Paper}>
-      <Table size={"small"} sx={{ minWidth: 650 }} aria-label="a dense table">
+      <Table sx={{ minWidth: 650 }} aria-label="a dense table">
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
@@ -34,10 +34,10 @@ const Users = () => {
               key={row._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" style={{whiteSpace: "nowrap"}}>
                 {row._id}
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" style={{whiteSpace: "nowrap"}}>
                 {row.name}
               </TableCell>
               <TableCell >{row.email}</TableCell>

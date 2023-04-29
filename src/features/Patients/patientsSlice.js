@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { getAllPatients } from "../../Services/apiServices"
 
 export const patientsList = createAsyncThunk(
@@ -18,18 +18,28 @@ const patientsListSlice = createSlice({
     error: null,
     paginatedData: [],
     page: 0,
-    rows: 5,
+    rows: 10,
   },
   reducers: {
-    changePage: (state, action) => ({
-      ...state,
-      page: action.payload,
-      rows: 5,
-    }),
-    changeRow: (state, action) => ({
-      ...state,
-      rows: action.payload,
-    })
+    changePage: (initialState, action) => {
+      console.log("changesPage", current(initialState), action)
+      const page = action.payload;
+      return {
+        ...initialState,
+        page,
+        paginatedData: initialState.data.slice(page*initialState.rows, (page+1)*initialState.rows)
+      }
+    },
+    changeRow: (initialState, action) => {
+      console.log("changeRow", initialState, action)
+      const rows = action.payload;
+      return {
+        ...initialState,
+        rows,
+        page: 0,
+        paginatedData:  initialState.data.slice(0, rows*10),
+      }
+    }
   },
   extraReducers: builder => {
     builder
@@ -42,7 +52,7 @@ const patientsListSlice = createSlice({
         fetching: false,
         fetched: true,
         data: action?.payload?.data,
-        paginatedData: action?.payload?.data
+        paginatedData: action?.payload?.data?.slice(0,initialState.rows)
       }))
       .addCase(patientsList.rejected, (initialState, action) => ({
         ...initialState,

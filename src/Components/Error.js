@@ -4,7 +4,7 @@ const ErrorPage = () => {
       <h1>
         Unauthorized Access
       </h1>
-      <a href = "/">Return to Home Screen</a>
+      <a href = "/">Login to continue</a>
     </div>
   )
 }

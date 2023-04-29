@@ -29,7 +29,7 @@ const usersListSlice = createSlice({
       fetching: false,
       fetched: true,
       data: action?.payload?.data,
-      isAdmin: action.payload.role == "admin"
+      isAdmin: action.payload.role === "admin"
     }))
     .addCase(usersList.rejected, (initialState, action) => ({
       ...initialState,

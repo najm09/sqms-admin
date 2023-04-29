@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import { Button, Grid, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from './loginSlice';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { fetching, isAdmin, loginMessage } = useSelector(({ loginActionReducer }) => loginActionReducer);
+  const { fetching, isAdmin } = useSelector(({ loginActionReducer }) => loginActionReducer);
 
   const handleSubmit = () => {
     dispatch(loginAction({ email, password }));
   }
 
   useEffect(() => {
-    if(isAdmin) window.location.replace("/dashboard");
+    if(isAdmin) navigate("/dashboard")
   })
 
   return (

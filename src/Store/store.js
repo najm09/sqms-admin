@@ -1,4 +1,4 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import adminActionReducer from '../features/Admin/AdminActionsSlice';
 import loginActionReducer from '../features/Login/loginSlice'
 import QueueActionReducer from "../features/Queue/QueueSlice"
@@ -12,7 +12,7 @@ export const store = configureStore({
     loginActionReducer,
     QueueActionReducer,
     UsersListActionReducer,
-    PatinetsListActionReducer
+    PatinetsListActionReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck : false

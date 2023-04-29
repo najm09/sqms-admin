@@ -11,19 +11,26 @@ import {patientsList, changePage, changeRow} from './patientsSlice';
 
 const Patients = () => {
   const dispatch = useDispatch();
-  const {fetched, paginatedData} = useSelector(({PatinetsListActionReducer}) => PatinetsListActionReducer);
+  const {fetched, data, paginatedData, page, rows} = useSelector(({PatinetsListActionReducer}) => PatinetsListActionReducer);
   const TableHeader = ["id", "Name", "Contact Number", "Family Contact", "Address", "Doctor", "Registered By", "Token Number","Current Panelty", "Body Temp", "Age", "Weight", "Blood Type", "Blood Pressure", "Oxygen Level", "Description", "Apppointment Date", "Gender"];
   useEffect(() => {
     dispatch(patientsList());
   },[])
+
+  const handleChangePage = (event, newPage) => {
+    dispatch(changePage(newPage));
+  };
+  const handleChangeRowsPerPage = (event) => {
+    dispatch(changeRow((parseInt(event.target.value, 10))));
+  };
   return (
     <TableContainer component={Paper}>
-      <Table size = "small" aria-label="a dense table">
+      <Table  aria-label="a dense table">
         <TableHead>
           <TableRow>
             {
               TableHeader.map((heading) => (
-                <TableCell >{heading}</TableCell>
+                <TableCell style={{whiteSpace: "nowrap"}}>{heading}</TableCell>
               ))
             }
           </TableRow>
@@ -31,19 +38,19 @@ const Patients = () => {
         <TableBody>
           {fetched && paginatedData.map((data) => (
             <TableRow>
-              {Object.values(data).map((item) => <TableCell>{item}</TableCell>)}
+              {Object.values(data).map((item) => <TableCell style={{whiteSpace: "nowrap"}}>{item}</TableCell>)}
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      {/* <TablePagination
+      <TablePagination
         component="div"
         count={data?.length}
-        page={0}
+        page={page}
         onPageChange={handleChangePage}
-        rowsPerPage={5}
+        rowsPerPage={rows}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      /> */}
+      />
     </TableContainer>
   );
 }
