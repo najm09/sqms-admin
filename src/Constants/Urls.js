@@ -10,5 +10,3 @@ export const endpoints = {
   QUEUE_STATUS: "/qstatus",
   ADMIN_ACTIONS: "/admin-action"
 }
-
-// `${MAIN_URL.ALL_DETAILS}${endpoints.USERS}`

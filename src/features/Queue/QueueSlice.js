@@ -3,9 +3,13 @@ import {getQueueStatus} from "../../Services/apiServices"
 
 export const QueueAction = createAsyncThunk(
   "UserQueueReqAction",
-  async (body) => {
-    const resposne  = await getQueueStatus(body);
-    return resposne;
+  async (body, {rejectWithValue}) => {
+    try {
+      const response  = await getQueueStatus(body);
+      return response
+    } catch ({response}) {
+      return rejectWithValue(response)
+    }
   }
 )
 
@@ -14,6 +18,7 @@ const QueueActionSlice = createSlice({
   initialState: {
     fetching : false,
     fetched : false,
+    date: "",
     data : [],
     error: null
   },
@@ -21,19 +26,27 @@ const QueueActionSlice = createSlice({
     builder
     .addCase(QueueAction.pending, (initialState) =>({
       ...initialState,
-      fetching: true
+      fetching: true,
+      error: null,
     }))
     .addCase(QueueAction.fulfilled, (initialState, action) =>({
       ...initialState,
       fetching: false,
       fetched : true,
-      data : action?.payload.data
+      data : action?.payload.data,
+      date : action?.payload.data[0]?.date,
+      error: null,
     }))
-    .addCase(QueueAction.rejected, (initialState, action) =>({
-      ...initialState,
-      fetching: false,
-      error : action?.payload
-    }))
+    .addCase(QueueAction.rejected, (initialState, action) =>{
+      console.log("QueueAction", action);
+      return {
+        ...initialState,
+        fetching: false,
+        fetched: false,
+        error : action?.payload?.data?.message,
+        data : []
+      }
+    })
   }
 })
 

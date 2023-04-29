@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Months } from "../../Constants/Calender"
 import { QueueAction } from "./QueueSlice"
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,55 +8,57 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useStyles } from './styles';
 
 
-
-export default function FirstComponent() {
+export default function QueueStatus() {
+  const classes = useStyles();
+  const TableHeader = ["Name", "Contact Number", "Token Number"];
   const dispatch = useDispatch();
-  const [date, setDate] = useState("");
-  const {fetched, data } = useSelector(({ QueueActionReducer }) => QueueActionReducer);
-
-
-  const TableHeader = ["Name", "contact", "Token Number"];
+  const { fetched, data, date, error } = useSelector(({ QueueActionReducer }) => QueueActionReducer);
 
   const handleChange = (e) => {
     let [year, month, currDate] = e.target.value.split("-");
     month = Months[month];
-    setDate([currDate, month, year].join("-"));
-    dispatch(QueueAction({ date }));
+    let requestDate = [currDate, month, year].join("-");
+    dispatch(QueueAction({ date: requestDate }));
   }
 
   return (
-    <div>
-      <input type='date' onChange={handleChange}></input>
+    <div className={classes.root}>
+      <label for="date">Please Select a Date</label>
+      <input type='date' onChange={handleChange} id="date"></input>
+      {error ? <Chip label={error} className={classes.chip} color="error" /> : ""}
       {
-        fetched ? <TableContainer component={Grid} margin={5}>
-          <Chip label={`Queue Status : ${data.length}`} variant='outlined' color='info' /> &nbsp;
-          <Chip label={`Date : ${date}`} variant='outlined' color='secondary' />
-          <hr />
+        fetched ? <TableContainer component={Grid}>
+          <div className={classes.gridContainer}>
+            <Chip label={"Queue Status"} color='primary' className={classes.chip} />
+            <Chip label={`Total Appointments:${data.length}`} color='error' className={classes.chip} />
+            <Chip label={`Date:${date}`} color='info' className={classes.chip} />
+
+          </div>
           <Table size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
                 {
                   TableHeader.map((heading) => (
-                    <TableCell style={{ fontWeight: "bold" }}>{heading}</TableCell>
+                    <TableCell className={classes.header}>{heading}</TableCell>
                   ))
                 }
               </TableRow>
             </TableHead>
             <TableBody>
-
               {fetched && data.map((data) => (
                 <TableRow key={data._id}>
-                  <TableCell>{data.name}</TableCell>
-                  <TableCell>{data.contactNumber}</TableCell>
-                  <TableCell>{data.tokenNumber}</TableCell>
+                  <TableCell>{data.name || "Not Available"} </TableCell>
+                  <TableCell>{data.contactNumber || "Not Available"}</TableCell>
+                  <TableCell>{data.tokenNumber || "Not Available"}</TableCell>
                 </TableRow>
               ))}
 
             </TableBody>
           </Table>
-        </TableContainer> : <Chip label="No Apppointment on this day"/>
+        </TableContainer> : ""
       }
 
     </div>

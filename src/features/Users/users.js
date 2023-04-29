@@ -8,24 +8,29 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {usersList} from './usersSlice';
+import { useStyles } from './style';
 
 
 const Users = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const {fetched, data} = useSelector(({UsersListActionReducer}) => UsersListActionReducer);
   useEffect(() => {
     dispatch(usersList());
-  },[])
+  })
+
+  const header = ["User Id", "Name", "Email", "Role"];
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="a dense table">
+    <TableContainer component={Paper} >
+      <Table sx={{ minWidth: 650, padding: 0 }} aria-label="a dense table" className={classes.root}>
         <TableHead>
           <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell >Email</TableCell>
-            <TableCell >Role</TableCell>
+            {
+              header.map(heading => (
+                <TableCell className={classes.header}>{heading}</TableCell>
+              ))
+            }
           </TableRow>
         </TableHead>
         <TableBody>

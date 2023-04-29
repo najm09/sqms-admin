@@ -10,11 +10,11 @@ import Users from '../Users/users';
 import Error from "../../Components/Error"
 import Patients from '../Patients/patients';
 import QueueStatus from "../../features/Queue/Queue"
-import { Disease } from '../Analytics/Disease';
+import Analytics from '../Analytics/Analytics';
+import { useStyles } from './styles';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -24,7 +24,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{marginTop:2}}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -46,6 +46,7 @@ function a11yProps(index) {
 }
 
 export default function Dashboard() {
+  const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const { isAdmin } = useSelector(({ loginActionReducer }) => loginActionReducer)
   const handleChange = (event, newValue) => {
@@ -53,27 +54,26 @@ export default function Dashboard() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <div className={classes.root}>
       {
         isAdmin ?
-          <Box>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <p>SQMS | Admin Panel</p>
-              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label="Users" {...a11yProps(0)} />
-                <Tab label="Patients" {...a11yProps(1)} />
-                <Tab label="Admin Actions" {...a11yProps(2)} />
-                <Tab label="Queue Status" {...a11yProps(3)} />
-                <Tab label="Analytics" {...a11yProps(4)} />
-              </Tabs>
-            </Box>
+          <Box sx={{borderColor:1, borderBottom:"divider"}}>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tab label="Users" {...a11yProps(0)} />
+              <Tab label="Patients" {...a11yProps(1)} />
+              <Tab label="Admin Actions" {...a11yProps(2)} />
+              <Tab label="Appointment Details" {...a11yProps(3)} />
+              <Tab label="Analytics" {...a11yProps(4)} />
+            </Tabs>
             <TabPanel value={value} index={0}><Users /></TabPanel>
             <TabPanel value={value} index={1}><Patients /></TabPanel>
             <TabPanel value={value} index={2}><AdminActionForm /></TabPanel>
             <TabPanel value={value} index={3}><QueueStatus /></TabPanel>
-            <TabPanel value={value} index={4}><Disease /></TabPanel>
+            <TabPanel value={value} index={4}>
+              <Analytics />
+            </TabPanel>
           </Box> : <Error />
       }
-    </Box>
+    </div>
   );
 }

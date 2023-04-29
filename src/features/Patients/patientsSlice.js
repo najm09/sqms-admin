@@ -37,7 +37,7 @@ const patientsListSlice = createSlice({
         ...initialState,
         rows,
         page: 0,
-        paginatedData:  initialState.data.slice(0, rows*10),
+        paginatedData:  initialState.data.slice(0, rows),
       }
     }
   },

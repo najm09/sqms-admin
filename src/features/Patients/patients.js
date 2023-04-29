@@ -8,14 +8,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {patientsList, changePage, changeRow} from './patientsSlice';
+import { useStyles } from './styles';
 
 const Patients = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const {fetched, data, paginatedData, page, rows} = useSelector(({PatinetsListActionReducer}) => PatinetsListActionReducer);
-  const TableHeader = ["id", "Name", "Contact Number", "Family Contact", "Address", "Doctor", "Registered By", "Token Number","Current Panelty", "Body Temp", "Age", "Weight", "Blood Type", "Blood Pressure", "Oxygen Level", "Description", "Apppointment Date", "Gender"];
+  const TableHeader = ["User Id", "Name", "Contact Number", "Family Contact", "Address", "Doctor", "Registered By", "Token Number","Current Panelty", "Body Temp", "Age", "Weight", "Blood Type", "Blood Pressure", "Oxygen Level", "Description", "Apppointment Date", "Gender", "Allergies"];
   useEffect(() => {
     dispatch(patientsList());
-  },[])
+})
 
   const handleChangePage = (event, newPage) => {
     dispatch(changePage(newPage));
@@ -23,14 +25,18 @@ const Patients = () => {
   const handleChangeRowsPerPage = (event) => {
     dispatch(changeRow((parseInt(event.target.value, 10))));
   };
+
+  console.log(classes)
+
+
   return (
     <TableContainer component={Paper}>
-      <Table  aria-label="a dense table">
+      <Table  aria-label="a dense table" className={classes.root}>
         <TableHead>
-          <TableRow>
+          <TableRow >
             {
               TableHeader.map((heading) => (
-                <TableCell style={{whiteSpace: "nowrap"}}>{heading}</TableCell>
+                <TableCell className={classes.header}>{heading}</TableCell>
               ))
             }
           </TableRow>
@@ -38,7 +44,7 @@ const Patients = () => {
         <TableBody>
           {fetched && paginatedData.map((data) => (
             <TableRow>
-              {Object.values(data).map((item) => <TableCell style={{whiteSpace: "nowrap"}}>{item}</TableCell>)}
+              {Object.values(data).map((item) => <TableCell style={{whiteSpace: "nowrap"}}>{item || "Not Available"}</TableCell>)}
             </TableRow>
           ))}
         </TableBody>

@@ -4,16 +4,17 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Box } from '@mui/material';
 import { updateAdminUser } from './AdminActionsSlice';
+import { useStyles } from './styles';
 
 const AdminActionForm = () => {
 
+  const classes = useStyles();
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
 
   return (
-    <Box width={"25%"}>
+    <div className={classes.root}>
       <TextField
-        fullWidth
         color='primary'
         variant='standard'
         required
@@ -38,7 +39,7 @@ const AdminActionForm = () => {
           Disallow Admin Access
         </Button>
       </Box>
-    </Box>
+    </div>
   )
 }
 
