@@ -17,7 +17,7 @@ const Users = () => {
   const {fetched, data} = useSelector(({UsersListActionReducer}) => UsersListActionReducer);
   useEffect(() => {
     dispatch(usersList());
-  },[dispatch])
+  })
 
   const header = ["User Id", "Name", "Email", "Role"];
 

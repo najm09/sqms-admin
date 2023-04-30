@@ -1,12 +1,10 @@
 import AreaGraph from "./Area/Area";
 import Diseases from "./Diseases/Diseases";
 import TimeWiseReport from "./Time/TimeWiseReport";
-import { useStyles } from "./styles";
 
 const Analytics = () => {
-  const classes = useStyles();
   return (
-    <span className={classes.root}>
+    <span style={{ display: "flex", justifyContent: "space-around", flexWrap:"wrap" }}>
       <Diseases />
       <Diseases/>
       <TimeWiseReport/>

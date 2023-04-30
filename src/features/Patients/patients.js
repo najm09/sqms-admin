@@ -17,7 +17,7 @@ const Patients = () => {
   const TableHeader = ["User Id", "Name", "Contact Number", "Family Contact", "Address", "Doctor", "Registered By", "Token Number","Current Panelty", "Body Temp", "Age", "Weight", "Blood Type", "Blood Pressure", "Oxygen Level", "Description", "Apppointment Date", "Gender", "Allergies"];
   useEffect(() => {
     dispatch(patientsList());
-},[dispatch])
+})
 
   const handleChangePage = (event, newPage) => {
     dispatch(changePage(newPage));

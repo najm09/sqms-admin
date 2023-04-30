@@ -59,17 +59,19 @@ export default function Dashboard() {
         isAdmin ?
           <Box sx={{borderColor:1, borderBottom:"divider"}}>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="Analytics" {...a11yProps(0)} />
-              <Tab label="Queue Status" {...a11yProps(1)} />
-              <Tab label="Users" {...a11yProps(2)} />
-              <Tab label="Patients" {...a11yProps(3)} />
-              <Tab label="Admin Actions" {...a11yProps(4)} />
+              <Tab label="Users" {...a11yProps(0)} />
+              <Tab label="Patients" {...a11yProps(1)} />
+              <Tab label="Admin Actions" {...a11yProps(2)} />
+              <Tab label="Appointment Details" {...a11yProps(3)} />
+              <Tab label="Analytics" {...a11yProps(4)} />
             </Tabs>
-            <TabPanel value={value} index={0}><Analytics /></TabPanel>
-            <TabPanel value={value} index={1}><QueueStatus /></TabPanel>
-            <TabPanel value={value} index={2}><Users /></TabPanel>
-            <TabPanel value={value} index={3}><Patients /></TabPanel>
-            <TabPanel value={value} index={4}><AdminActionForm /></TabPanel>
+            <TabPanel value={value} index={0}><Users /></TabPanel>
+            <TabPanel value={value} index={1}><Patients /></TabPanel>
+            <TabPanel value={value} index={2}><AdminActionForm /></TabPanel>
+            <TabPanel value={value} index={3}><QueueStatus /></TabPanel>
+            <TabPanel value={value} index={4}>
+              <Analytics />
+            </TabPanel>
           </Box> : <Error />
       }
     </div>
