@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles(() => ({
   root: {
     padding: 40,
-    marginTop: "100px",
+    marginTop: 20,
     fontFamily: "sans-serif",
     display: "flex",
     justifyContent: "center",

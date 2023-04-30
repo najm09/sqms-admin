@@ -12,6 +12,7 @@ function PieChartComponent({ xData, yData, title }) {
 
   return (
     <div>
+      <p>{title}</p>
       <PieChart width={500} height={300}>
         <Pie data={data} dataKey="y" nameKey="x" cx="50%" cy="50%" outerRadius={100} fill="#8884d8">
           {data.map((entry, index) => (
@@ -21,7 +22,6 @@ function PieChartComponent({ xData, yData, title }) {
         <Tooltip />
         <Legend />
       </PieChart>
-      <p>{title}</p>
     </div>
   );
 }

@@ -8,6 +8,7 @@ const Chart = (props) => {
   
   return (
     <div>
+      <p>{title}</p>
       <LineChart width={500} height={300} data={data}>
         <XAxis dataKey="x" />
         <YAxis dataKey="y"/>
@@ -16,7 +17,6 @@ const Chart = (props) => {
         <Legend />
         <Line type="monotone" dataKey="y" stroke="#8884d8" />
       </LineChart>
-      <p>{title}</p>
     </div>
   );
 };

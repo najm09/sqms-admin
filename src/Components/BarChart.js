@@ -8,6 +8,7 @@ function BarGraph({ xData, yData, title }) {
 
   return (
     <div>
+      <p>{title}</p>
       <BarChart width={500} height={300} data={data}>
         <XAxis dataKey="x" />
         <YAxis />
@@ -16,7 +17,6 @@ function BarGraph({ xData, yData, title }) {
         <Legend />
         <Bar dataKey="y" fill="#8884d8" />
       </BarChart>
-      <p>{title}</p>
     </div>
   );
 }
