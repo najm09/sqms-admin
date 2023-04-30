@@ -11,7 +11,7 @@ setUpAxios(axios);
 
 const App = () => {
   return (
-    <div className="App">
+    <div>
       <Provider store={store}>
         <BrowserRouter>
           <main>

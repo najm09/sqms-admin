@@ -6,12 +6,17 @@ import { useStyles } from "./styles";
 const Analytics = () => {
   const classes = useStyles();
   return (
-    <span className={classes.root}>
+    <div className={classes.root}>
+      <h1 className={classes.title}>SQMS | ANALYTICS</h1>
       <Diseases />
-      <Diseases/>
+      <AreaGraph />
+      <TimeWiseReport/>
+      <Diseases />
       <TimeWiseReport/>
       <AreaGraph />
-    </span>
+      
+      
+    </div>
   )
 }
 

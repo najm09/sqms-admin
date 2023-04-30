@@ -26,8 +26,8 @@ export default function QueueStatus() {
 
   return (
     <div className={classes.root}>
-      <label for="date">Please Select a Date</label>
-      <input type='date' onChange={handleChange} id="date"></input>
+      <label>Please Select a Date</label>
+      <input type='date' onChange={handleChange}></input>
       {error ? <Chip label={error} className={classes.chip} color="error" /> : ""}
       {
         fetched ? <TableContainer component={Grid}>
@@ -37,12 +37,12 @@ export default function QueueStatus() {
             <Chip label={`Date:${date}`} color='info' className={classes.chip} />
 
           </div>
-          <Table size="small" aria-label="a dense table">
+          <Table>
             <TableHead>
               <TableRow>
                 {
                   TableHeader.map((heading) => (
-                    <TableCell className={classes.header}>{heading}</TableCell>
+                    <TableCell  className={classes.header}>{heading}</TableCell>
                   ))
                 }
               </TableRow>

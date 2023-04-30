@@ -58,8 +58,8 @@ export default function Dashboard() {
       {
         isAdmin ?
           <Box sx={{borderColor:1, borderBottom:"divider"}}>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="Analytics" {...a11yProps(0)} />
+            <Tabs value={value} onChange={handleChange}>
+              <Tab label="Home" {...a11yProps(0)} />
               <Tab label="Queue Status" {...a11yProps(1)} />
               <Tab label="Users" {...a11yProps(2)} />
               <Tab label="Patients" {...a11yProps(3)} />

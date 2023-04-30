@@ -28,7 +28,7 @@ const Users = () => {
           <TableRow>
             {
               header.map(heading => (
-                <TableCell className={classes.header}>{heading}</TableCell>
+                <TableCell key={heading} className={classes.header}>{heading}</TableCell>
               ))
             }
           </TableRow>

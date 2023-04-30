@@ -6,6 +6,12 @@ export const useStyles = makeStyles(() => ({
     display: "flex", 
     justifyContent: "space-around", 
     flexWrap:"wrap" 
+  },
+  title:{
+    padding: 10,
+    display: "flex",
+    alignItems: "center"
   }
+
 
 }))
