@@ -38,7 +38,6 @@ const QueueActionSlice = createSlice({
       error: null,
     }))
     .addCase(QueueAction.rejected, (initialState, action) =>{
-      console.log("QueueAction", action);
       return {
         ...initialState,
         fetching: false,

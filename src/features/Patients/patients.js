@@ -26,25 +26,22 @@ const Patients = () => {
     dispatch(changeRow((parseInt(event.target.value, 10))));
   };
 
-  console.log(classes)
-
-
   return (
     <TableContainer component={Paper}>
-      <Table  aria-label="a dense table" className={classes.root}>
+      <Table className={classes.root}>
         <TableHead>
           <TableRow >
             {
               TableHeader.map((heading) => (
-                <TableCell className={classes.header}>{heading}</TableCell>
+                <TableCell key={heading} className={classes.header}>{heading}</TableCell>
               ))
             }
           </TableRow>
         </TableHead>
         <TableBody>
           {fetched && paginatedData.map((data) => (
-            <TableRow>
-              {Object.values(data).map((item) => <TableCell style={{whiteSpace: "nowrap"}}>{item || "Not Available"}</TableCell>)}
+            <TableRow key={data._id}>
+              {Object.values(data).map((item) => <TableCell key={data._id} style={{whiteSpace: "nowrap"}}>{item || "Not Available"}</TableCell>)}
             </TableRow>
           ))}
         </TableBody>
