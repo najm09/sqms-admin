@@ -1,4 +1,3 @@
-import './App.css'
 import axios from 'axios';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from 'react-redux'
