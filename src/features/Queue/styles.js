@@ -2,6 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles(() => ({
   root: {
+    padding: 10,
     marginTop: "100px",
     fontFamily: "sans-serif",
     display: "flex",
@@ -10,6 +11,10 @@ export const useStyles = makeStyles(() => ({
     alignItems: "center",
     flexWrap: "wrap",
     flexDirection: "column",
+    width: "100%",
+    height: "100vh",
+    position: "fixed",
+    bottom: 0,
     "& input": {
       width: "300px",
       height: "38px",
@@ -44,7 +49,7 @@ export const useStyles = makeStyles(() => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "10px"
+    marginBottom: "50px"
   }
 
   
