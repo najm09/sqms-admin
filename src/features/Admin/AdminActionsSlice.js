@@ -15,6 +15,7 @@ const adminActionSlice = createSlice({
     fetching: false,
     fetched: false,
     data: {},
+    role: null,
     error: null
   },
   extraReducers: builder => {
@@ -22,16 +23,21 @@ const adminActionSlice = createSlice({
     .addCase(updateAdminUser.pending, (initialState) => ({
       ...initialState,
       fetching : true,
+      fetched: false,
+      role: null
     }))
     .addCase(updateAdminUser.fulfilled, (initialState, action) => ({
       ...initialState,
       fetching : false,
       fetched : true,
+      role: action.payload?.data?.role,
       data : action.payload
     }))
     .addCase(updateAdminUser.rejected, (initialState, action) => ({
       ...initialState,
       fetching : false,
+      fetched: false,
+      role: null,
       error : action.payload
     }))
   }

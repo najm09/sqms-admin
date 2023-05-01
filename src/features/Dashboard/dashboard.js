@@ -5,7 +5,6 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useSelector } from 'react-redux';
-import AdminActionForm from "../Admin/AdminActions";
 import Users from '../Users/users';
 import Error from "../../Components/Error"
 import Patients from '../Patients/patients';
@@ -63,13 +62,11 @@ export default function Dashboard() {
               <Tab label="Queue Status" {...a11yProps(1)} />
               <Tab label="Users" {...a11yProps(2)} />
               <Tab label="Patients" {...a11yProps(3)} />
-              <Tab label="Admin Actions" {...a11yProps(4)} />
             </Tabs>
             <TabPanel value={value} index={0}><Analytics /></TabPanel>
             <TabPanel value={value} index={1}><QueueStatus /></TabPanel>
             <TabPanel value={value} index={2}><Users /></TabPanel>
             <TabPanel value={value} index={3}><Patients /></TabPanel>
-            <TabPanel value={value} index={4}><AdminActionForm /></TabPanel>
           </Box> : <Error />
       }
     </div>

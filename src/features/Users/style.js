@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles(() => ({
   root: {
     fontFamily: "sans-serif",
-    marginTop: 50,
+    marginTop: 10,
     "& tr:nth-child(even)": {
       backgroundColor: "#e8f3fc"
     }
