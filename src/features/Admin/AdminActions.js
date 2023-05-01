@@ -6,11 +6,10 @@ import { updateAdminUser } from './AdminActionsSlice';
 const AdminActionForm = (props) => {
   const dispatch = useDispatch();
   const { role, email } = props;
-  console.log(email);
-  return (
+   return (
     <div>
       {
-        role === "admin" ?
+        role === "admin" ? 
           <Button sx={{ textTransform: 'lowercase !important' }} onClick={() => {dispatch(updateAdminUser({email, role: "user"}))}}>
             Remove Admin
           </Button> :

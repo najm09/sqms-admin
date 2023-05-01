@@ -7,13 +7,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {Alert} from '@mui/material';
 import {patientsList, changePage, changeRow} from './patientsSlice';
 import { useStyles } from './styles';
 
 const Patients = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const {fetched, data, paginatedData, page, rows} = useSelector(({PatinetsListActionReducer}) => PatinetsListActionReducer);
+  const {fetching, fetched, data, paginatedData, page, rows} = useSelector(({PatinetsListActionReducer}) => PatinetsListActionReducer);
   const TableHeader = ["User Id", "Name", "Contact Number", "Family Contact", "Address", "Doctor", "Registered By", "Token Number","Current Panelty", "Body Temp", "Age", "Weight", "Blood Type", "Blood Pressure", "Oxygen Level", "Description", "Apppointment Date", "Gender", "Allergies"];
   useEffect(() => {
     dispatch(patientsList());
@@ -28,6 +29,9 @@ const Patients = () => {
 
   return (
     <TableContainer component={Paper}>
+       {
+          fetching ? <Alert severity='info'>Fetching Patients Data</Alert> : ""
+        }
       <Table className={classes.root}>
         <TableHead>
           <TableRow >

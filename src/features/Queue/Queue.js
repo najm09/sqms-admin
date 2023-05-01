@@ -3,7 +3,7 @@ import { Months } from "../../Constants/Calender"
 import { QueueAction } from "./QueueSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import Table from '@mui/material/Table';
-import { Grid, TableBody, Chip } from '@mui/material';
+import { Grid, TableBody, Chip, Alert } from '@mui/material';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
@@ -15,7 +15,7 @@ export default function QueueStatus() {
   const classes = useStyles();
   const TableHeader = ["Name", "Contact Number", "Token Number"];
   const dispatch = useDispatch();
-  const { fetched, data, date, error } = useSelector(({ QueueActionReducer }) => QueueActionReducer);
+  const { fetching, fetched, data, date, error } = useSelector(({ QueueActionReducer }) => QueueActionReducer);
 
   const handleChange = (e) => {
     let [year, month, currDate] = e.target.value.split("-");
@@ -26,9 +26,11 @@ export default function QueueStatus() {
 
   return (
     <div className={classes.root}>
-      <label>Please Select a Date</label>
+      <label>PLEASE SELECT A DATE</label>
       <input type='date' onChange={handleChange}></input>
-      {error ? <Chip label={error} className={classes.chip} color="error" /> : ""}
+      {error ? <Chip label={error} className={classes.chip} color="error" /> : 
+        fetching ? <Alert severity='info'>Fetching Queue Status</Alert> : ""
+      }
       {
         fetched ? <TableContainer component={Grid}>
           <div className={classes.gridContainer}>

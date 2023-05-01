@@ -2,8 +2,8 @@ import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles(() => ({
   root: {
-    padding: 40,
-    marginTop: "100px",
+    // padding: 40,
+    // marginTop: 10,
     fontFamily: "sans-serif",
     display: "flex",
     justifyContent: "center",
@@ -24,8 +24,8 @@ export const useStyles = makeStyles(() => ({
       color: "red"
     },
     "& label": {
-      marginBottom: "10px",
-      fontWeight: "bold",
+      position: "fixed",
+      top: 15,
       display: "block",
       color: "#1976d2",
     },
