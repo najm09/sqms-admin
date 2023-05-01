@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { useStyles } from '../features/Analytics/styles';
 
 const Chart = (props) => {
+  const classes = useStyles();
   const {xData, yData, title} = props;
   const data = xData.map((x, index) => ({ x, y: yData[index] }));
   
@@ -16,7 +18,7 @@ const Chart = (props) => {
         <Legend />
         <Line type="monotone" dataKey="y" stroke="#8884d8" />
       </LineChart>
-      <p>{title}</p>
+      <p className={classes.graphTitle}>{title}</p>
     </div>
   );
 };

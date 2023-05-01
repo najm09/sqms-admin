@@ -23,7 +23,8 @@ const LoginForm = () => {
   return (
     <div className={classes.root}>
       {error ? <Alert severity="error">{error}</Alert> : 
-      loginMessage ? <Alert severity='warning'>{loginMessage}</Alert>: ""}
+      loginMessage ? <Alert severity='warning'>{loginMessage}</Alert>:
+      fetching ? <Alert severity='primary'>logging in</Alert>: ""}
       &nbsp;
       <h3>SQMS ADMIN LOGIN</h3>
       &nbsp;

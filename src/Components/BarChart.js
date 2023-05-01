@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { useStyles } from '../features/Analytics/styles';
 
 
 function BarGraph({ xData, yData, title }) {
+  const classes = useStyles();
   const data = xData.map((x, index) => ({ x, y: yData[index] }));
 
   return (
@@ -16,7 +18,7 @@ function BarGraph({ xData, yData, title }) {
         <Legend />
         <Bar dataKey="y" fill="#8884d8" />
       </BarChart>
-      <p>{title}</p>
+      <p className={classes.graphTitle}>{title}</p>
     </div>
   );
 }

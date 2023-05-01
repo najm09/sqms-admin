@@ -56,7 +56,7 @@ export default function Dashboard() {
     <div className={classes.root}>
       {
         isAdmin ?
-          <Box sx={{borderColor:1, borderBottom:"divider"}}>
+          <Box sx={{borderColor:1, borderBottom:"divider"}} >
             <Tabs value={value} onChange={handleChange}>
               <Tab label="Home" {...a11yProps(0)} />
               <Tab label="Queue Status" {...a11yProps(1)} />

@@ -18,7 +18,9 @@ export default function QueueStatus() {
   const { fetching, fetched, data, date, error } = useSelector(({ QueueActionReducer }) => QueueActionReducer);
 
   const handleChange = (e) => {
+    console.log("val",e.target.value);
     let [year, month, currDate] = e.target.value.split("-");
+    if(e.target.value === "") return ;
     month = Months[month];
     let requestDate = [currDate, month, year].join("-");
     dispatch(QueueAction({ date: requestDate }));
@@ -28,39 +30,37 @@ export default function QueueStatus() {
     <div className={classes.root}>
       <label>PLEASE SELECT A DATE</label>
       <input type='date' onChange={handleChange}></input>
-      {error ? <Chip label={error} className={classes.chip} color="error" /> : 
-        fetching ? <Alert severity='info'>Fetching Queue Status</Alert> : ""
-      }
-      {
-        fetched ? <TableContainer component={Grid}>
-          <div className={classes.gridContainer}>
-            <Chip label={"Queue Status"} color='primary' className={classes.chip} />
-            <Chip label={`Total Appointments:${data.length}`} color='error' className={classes.chip} />
-            <Chip label={`Date:${date}`} color='info' className={classes.chip} />
+      {error ? <Chip label={error} className={classes.chip} color="error" /> :
+        fetching ? <Alert severity='info'>Fetching Queue Status</Alert> :
+          fetched ? <TableContainer component={Grid}>
+            <div className={classes.gridContainer}>
+              <Chip label={"Queue Status"} color='primary' className={classes.chip} />
+              <Chip label={`Total Appointments:${data.length}`} color='error' className={classes.chip} />
+              <Chip label={`Date:${date}`} color='info' className={classes.chip} />
 
-          </div>
-          <Table>
-            <TableHead>
-              <TableRow>
-                {
-                  TableHeader.map((heading) => (
-                    <TableCell  className={classes.header}>{heading}</TableCell>
-                  ))
-                }
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {fetched && data.map((data) => (
-                <TableRow key={data._id}>
-                  <TableCell>{data.name || "Not Available"} </TableCell>
-                  <TableCell>{data.contactNumber || "Not Available"}</TableCell>
-                  <TableCell>{data.tokenNumber || "Not Available"}</TableCell>
+            </div>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {
+                    TableHeader.map((heading) => (
+                      <TableCell className={classes.header}>{heading}</TableCell>
+                    ))
+                  }
                 </TableRow>
-              ))}
+              </TableHead>
+              <TableBody>
+                {fetched && data.map((data) => (
+                  <TableRow key={data._id}>
+                    <TableCell>{data.name || "Not Available"} </TableCell>
+                    <TableCell>{data.contactNumber || "Not Available"}</TableCell>
+                    <TableCell>{data.tokenNumber || "Not Available"}</TableCell>
+                  </TableRow>
+                ))}
 
-            </TableBody>
-          </Table>
-        </TableContainer> : ""
+              </TableBody>
+            </Table>
+          </TableContainer> : ""
       }
 
     </div>

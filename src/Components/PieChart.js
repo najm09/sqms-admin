@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PieChart, Pie, Tooltip, Cell, Legend } from 'recharts';
-
+import { useStyles } from '../features/Analytics/styles';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF'];
 
-
 function PieChartComponent({ xData, yData, title }) {
+  const classes = useStyles();
   const data = xData.map((x, index) => ({ x, y: yData[index] }));
-  
 
   return (
     <div>
@@ -21,7 +20,7 @@ function PieChartComponent({ xData, yData, title }) {
         <Tooltip />
         <Legend />
       </PieChart>
-      <p>{title}</p>
+      <p className={classes.graphTitle}>{title}</p>
     </div>
   );
 }

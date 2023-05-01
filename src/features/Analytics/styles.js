@@ -9,8 +9,13 @@ export const useStyles = makeStyles(() => ({
   },
   title:{
     padding: 10,
+    textAlign: "center",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  graphTitle: {
+    textAlign: "center"
   }
 
 

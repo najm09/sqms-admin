@@ -11,10 +11,9 @@ const Analytics = () => {
       <Diseases />
       <AreaGraph />
       <TimeWiseReport/>
-      <Diseases />
+      {/* <Diseases />
       <TimeWiseReport/>
-      <AreaGraph />
-      
+      <AreaGraph /> */}
       
     </div>
   )
