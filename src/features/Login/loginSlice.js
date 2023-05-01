@@ -3,9 +3,14 @@ import {login} from "../../Services/apiServices"
 
 export const loginAction = createAsyncThunk(
   "userLoginAction",
-  async (body) => {
-    const response = await login(body);
-    return response;
+  async (body, {rejectWithValue}) => {
+    try{
+      const response = await login(body);
+      return response;
+    }
+    catch({response}){
+      return rejectWithValue(response)
+    }
   }
 )
 
@@ -24,7 +29,9 @@ const loginActionSlice = createSlice({
     builder
     .addCase(loginAction.pending, (initialState) => ({
       ...initialState,
-      fetching : true
+      error: null,
+      fetching : true,
+      loginMessage: ""
     }))
     .addCase(loginAction.fulfilled, (initialState, action) => {
       localStorage.setItem("access-token", action?.payload?.data?.accessToken);
@@ -33,19 +40,19 @@ const loginActionSlice = createSlice({
         fetching : false,
         fetched : true,
         data : action?.payload,
+        error: null,
         isAdmin: action?.payload?.data?.role === "admin",
         accessToken: action?.payload?.data?.accessToken,
-        loginMessage: action.payload.status === "200" && 
+        loginMessage: action.payload.status === 200 && 
         (action?.payload?.data?.role !== "admin" 
         ? "Sorry You're not an admin !"
-        : "Wrong Credentials !"),
-
+        : ""),
       }
     })
     .addCase(loginAction.rejected, (initialState, action) => ({
       ...initialState,
       fetching : false,
-      error: action?.payload,
+      error: action?.payload.data.message,
       loginMessage: action?.payload,
 
     }))

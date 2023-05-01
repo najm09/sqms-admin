@@ -21,6 +21,9 @@ export const useStyles = makeStyles(() => ({
     "& h3": {
       color: "#33691e"
     }
+  },
+  alert: {
+    paddingBottom: 10
   }
 
 }))
