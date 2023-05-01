@@ -20,7 +20,7 @@ const Users = () => {
 
   useEffect(() => {
     dispatch(usersList());
-  }, [adminState])
+  }, [dispatch, adminState])
 
   const header = ["User Id", "Name", "Email", "Role", "Actions"];
 
