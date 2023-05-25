@@ -1,10 +1,14 @@
 import React from 'react'
 import BarChart from '../../../Components/BarChart'
+import {generateRandomNumbers } from '../../../Constants/Calender';
+import { toUpper } from 'lodash';
 
-const Diseases = () => {
+
+const Diseases = (props) => {
+  const {city} = props;
   const xData = ["TB", "Accident", "Cancer", "Asthama", "Fever", "Covid-19", "Cardiac Arrest", "Headache", "Migrane", ]
-  const yData = [100, 300, 120, 20, 10, 100, 600, 450, 444]
-  const title = "DISEASES DISTRIBUTION CHART"
+  var yData = generateRandomNumbers(20);
+  const title = `DISEASES DISTRIBUTION CHART ${toUpper(city)}`
   return (
     <div>
       <BarChart xData={xData} yData={yData} title={title}/>

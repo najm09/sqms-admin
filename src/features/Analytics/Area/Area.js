@@ -1,10 +1,13 @@
 import React from 'react'
 import Chart from '../../../Components/Chart'
+import {generateRandomNumbers } from '../../../Constants/Calender';
+import { toUpper } from 'lodash';
 
-const AreaGraph = () => {
+const AreaGraph = (props) => {
+  const {city} = props;
   const xData = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", ".", ".", "X", "Y", "Z"]
-  const yData = [100, 300, 120, 20, 10, 100, 600, 450, 444, 123, 435, 300, 987, 0, 0, 111, 121, 212]
-  const title = "PATIENTS DISTRIBUTION CHART"
+  var yData = generateRandomNumbers(20);
+  const title = `PATIENTS DISTRIBUTION CHART ${toUpper(city)}`
   return (
     <div>
       <Chart xData={xData} yData={yData} title={title}/>

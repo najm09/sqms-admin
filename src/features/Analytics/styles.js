@@ -2,6 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles(() => ({
   root: {
+    padding: 10,
     backgroundColor: "rgb(245, 242, 237)",
     display: "flex", 
     justifyContent: "space-around", 
@@ -15,8 +16,12 @@ export const useStyles = makeStyles(() => ({
     justifyContent: "center"
   },
   graphTitle: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+    fontSize: "16px",
+    color: "green",
+    fontWeight: "bold",
+    textDecoration: "underline"
+  },
 
 
 }))
