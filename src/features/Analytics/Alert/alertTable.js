@@ -46,20 +46,18 @@ export default function AlertTable(props) {
   const classes = useStyles();
 
   const rows = [
-    createData(`${city}`, 'XYZ', "JAN", "CVD"),
-    createData(`${city}`, 'XYZ', "MARCH", "Diabetes"),
-    createData(`${city}`, 'XYZ', "FEB", "Tuberculosis"),
-    createData(`${city}`, 'XYZ', "APR", "Tuberculosis"),
-    createData(`${city}`, 'XYZ', "JUNE", "Tuberculosis"),
-    createData(`${city}`, 'XYZ', "MAY", "Tuberculosis"),
-    createData(`${city}`, 'XYZ', "JAN", "Cancer"),
-    createData(`${city}`, 'XYZ', "FEB", "Cancer"),
-    createData(`${city}`, 'XYZ', "DEC", "Cancer"),
-    createData(`${city}`, 'XYZ', "AUG", "Cancer"),
-    createData(`${city}`, 'XYZ', "SEP", "Stroke"),
-    createData(`${city}`, 'XYZ', "AUG", "CVD"),
-    createData(`${city}`, 'NG', "APR", "Alzheimer"),
-    createData(`${city}`, 'BR', "JULY", "Stroke"),
+    createData(`${city}`, 'XYZ', "January", "CVD"),
+    createData(`${city}`, 'ABC', "February", "Diabetes"),
+    createData(`${city}`, 'YTUD', "March", "Tuberculosis"),
+    createData(`${city}`, 'SJSJ', "April", "Tuberculosis"),
+    createData(`${city}`, 'SSJS', "May", "Tuberculosis"),
+    createData(`${city}`, 'SSHS', "June", "Tuberculosis"),
+    createData(`${city}`, 'QWER', "July", "Cancer"),
+    createData(`${city}`, 'ASDF', "August", "Cancer"),
+    createData(`${city}`, 'SWAW', "September", "Cancer"),
+    createData(`${city}`, 'SEFGF', "October", "Cancer"),
+    createData(`${city}`, 'KJUi', "November", "Stroke"),
+    createData(`${city}`, 'gYUG', "Decemeber", "CVD"),
   ];
 
   const handleChangePage = (event, newPage) => {

@@ -11,7 +11,7 @@ export const getAllPatients = async() => {
 }
 
 export const getQueueStatus = async(body) => {
-  return await axios.post(`${MAIN_URL.ALL_DETAILS}${endpoints.QUEUE_STATUS}`, body, {headers: headers()});
+  return await axios.post(`${MAIN_URL.ALL_DETAILS}${endpoints.QUEUE_STATUS}`, body);
 }
 
 export const login = async(body) => {

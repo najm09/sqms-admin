@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { PieChart, Pie, Tooltip, Cell, Legend } from 'recharts';
 import { useStyles } from '../features/Analytics/styles';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#009688', '00bcd4', '#a1887f', '#90a4ae', '#ff3d00', '#ff8a65', '#ffeb3b', '#7cb342', '#f0f4c3', '#00695c', '#84ffff'];
 
 function PieChartComponent({ xData, yData, title }) {
   const classes = useStyles();

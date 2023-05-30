@@ -6,7 +6,8 @@ export const useStyles = makeStyles(() => ({
     marginTop: 10,
     "& tr:nth-child(even)": {
       backgroundColor: "#e8f3fc"
-    }
+    },
+    flexWrap: "nowrap"
   },
   header: {
     backgroundColor: "#1976d2 !important",
